@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8"/>
-        <title th:text = "${title}">Title</title>
+    <head th:replace = "fragments :: head">
     </head>
     <body>
-            <h1 th:text = "${title}">H1 Header</h1>
+        <h1 th:text = "${title}">H1 Header</h1>
+        <nav th:replace = "fragments :: nav"></nav>
+        <p th:unless = "${cheeses} and ${cheeses.size()}">Who moved my cheese?</p>
+        <table class="table">
+
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+
+            <tr th:each="cheese : ${cheeses}">
+                <td th:text="${cheese.key}"></td>
+                <td th:text="${cheese.value}"></td>
+            </tr>
+
+        </table>
     </body>
 </html>
