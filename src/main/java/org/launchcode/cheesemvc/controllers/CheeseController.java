@@ -1,12 +1,13 @@
 package org.launchcode.cheesemvc.controllers;
 
+import org.launchcode.cheesemvc.models.Cheese;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Created by max on 5/16/17.
@@ -15,7 +16,7 @@ import java.util.HashMap;
 @RequestMapping(value = "cheese")
 public class CheeseController {
 
-    static HashMap<String, String> cheeses = new HashMap<>();
+    static ArrayList<Cheese> cheeses = new ArrayList<>();
 
     @RequestMapping(value = "")
     public String index(Model model){
@@ -32,7 +33,8 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAdd(@RequestParam String cheeseName, @RequestParam String cheeseDescription){
-        cheeses.put(cheeseName, cheeseDescription);
+        Cheese newCheese = new Cheese(cheeseName, cheeseDescription);
+        cheeses.add(newCheese);
         return "redirect:";
     }
 }
