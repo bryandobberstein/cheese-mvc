@@ -1,19 +1,30 @@
 package org.launchcode.cheesemvc.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by max on 5/17/17.
  */
 public class Cheese {
 
+    @NotNull
+    @Size(min = 1, message = "Please include a name.")
     private String name;
+
+    @NotNull
+    @Size(min = 1, message = "Please include a description.")
     private String description;
+
+    private CheeseType type;
     private int cheeseId;
     private static int nextId = 1;
 
-    public Cheese(String name, String description) {
+    public Cheese(String name, String description, CheeseType type) {
         this();
         this.name = name;
         this.description = description;
+        this.type = type;
     }
 
     public Cheese(){
@@ -45,11 +56,11 @@ public class Cheese {
         this.cheeseId = cheeseId;
     }
 
-    @Override
-    public String toString() {
-        return "Cheese{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+    public CheeseType getType() {
+        return type;
+    }
+
+    public void setType(CheeseType type) {
+        this.type = type;
     }
 }
