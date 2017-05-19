@@ -71,15 +71,12 @@ public class CheeseController {
 
     @RequestMapping(value="edit/{cheeseId}", method=RequestMethod.POST)
     //public String processEditForm(@RequestParam int cheeseId, @RequestParam String name, @RequestParam String description){
-    public String processEdit(Model model, @RequestParam int cheeseId, @RequestParam String name, @RequestParam String description, @RequestParam CheeseType type){
+    public String processEdit(int cheeseId, String name, String description, CheeseType type){
 
         CheeseData.getById(cheeseId).setName(name);
         CheeseData.getById(cheeseId).setDescription(description);
         CheeseData.getById(cheeseId).setType(type);
 
-        model.addAttribute("cheeses", CheeseData.getAll());
-        model.addAttribute("title", "My Cheeses");
-
-        return "cheese/index";
+        return "redirect:/cheese";
     }
 }
